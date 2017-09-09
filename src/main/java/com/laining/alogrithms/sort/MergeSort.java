@@ -2,51 +2,48 @@ package com.laining.alogrithms.sort;
 
 import static com.laining.alogrithms.sort.SortUtils.less;
 
-
 /**
  * 
- * @author admin
- * ¹é²¢ÅÅÐòµÄË¼ÏëÊÇ:½«×óÓÒÁ½±ß¾Ö²¿ÓÐÐòµÄ×ÓÊý×é¹é²¢¾ÍÄÜµÃµ½Ò»¸öÓÐÐòµÄ´óÊý×é
+ * @author admin ï¿½é²¢ï¿½ï¿½ï¿½ï¿½ï¿½Ë¼ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¾Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é²¢ï¿½ï¿½ï¿½ÜµÃµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 public class MergeSort {
-	
-	@SuppressWarnings("unchecked")
-	public static <T extends Comparable<? super T>> void sort(T[] array) {
-		if(array == null)
-			return;
-		int len = array.length;
-		if(len <= 1)
-			return;
-		@SuppressWarnings("rawtypes")
-		Comparable[] aux= new Comparable[array.length];
-		sort(array,0,array.length -1,aux);
-		
-	} 
-	
-	private static <T extends Comparable<? super T>> void sort(T[] array,int lo,int hi,T[] aux) {
-		if(lo >= hi)
-			return;
-		int mid = lo + (hi-lo)/2;
-		sort(array,lo,mid,aux);
-		sort(array,mid + 1,hi,aux);
-		merge(array, lo, hi, mid, aux);
-	}
-	
-	private static <T extends Comparable<? super T>> void merge(T[] array,int lo,int hi,int mid,T[] aux) {
-		int i = lo,j = mid+1;    // Öð¸ö±È½ÏÁ½¸ö×ÓÊý×éÖÐÎ´ÅÅÐòµÄ×îÐ¡Öµ
-		for(int k = lo;k<= hi;k++)
-			aux[k] = array[k];
-		for(int k = lo;k<= hi;k++) {
-			if(i > mid)
-				array[k] = aux[j++];
-			else if(j > hi)
-				array[k] =aux[i++];
-			else if(less(aux[j], aux[i]))
-				array[k] = aux[j++];
-			else
-				array[k] = aux[i++];
-		}
-		
-	}
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Comparable<? super T>> void sort(T[] array) {
+        if (array == null)
+            return;
+        int len = array.length;
+        if (len <= 1)
+            return;
+        T[] aux = (T[]) new Comparable[array.length];
+        sort(array, 0, array.length - 1, aux);
+
+    }
+
+    private static <T extends Comparable<? super T>> void sort(T[] array, int lo, int hi, T[] aux) {
+        if (lo >= hi)
+            return;
+        int mid = lo + (hi - lo) / 2;
+        sort(array, lo, mid, aux);
+        sort(array, mid + 1, hi, aux);
+        merge(array, lo, hi, mid, aux);
+    }
+
+    private static <T extends Comparable<? super T>> void merge(T[] array, int lo, int hi, int mid, T[] aux) {
+        int i = lo, j = mid + 1; // ï¿½ï¿½ï¿½ï¿½È½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Öµ
+        for (int k = lo; k <= hi; k++)
+            aux[k] = array[k];
+        for (int k = lo; k <= hi; k++) {
+            if (i > mid)
+                array[k] = aux[j++];
+            else if (j > hi)
+                array[k] = aux[i++];
+            else if (less(aux[j], aux[i]))
+                array[k] = aux[j++];
+            else
+                array[k] = aux[i++];
+        }
+
+    }
 
 }
